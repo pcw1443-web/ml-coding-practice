@@ -120,3 +120,31 @@ data =  {
 # Dataframe 생성
 df = pd.DataFrame(data)
 print(df.head())
+
+# 나이가 30 이상인 직원의 이름과 급여 반환
+result = df[df['age'] > 30][['name','salary']]
+print(result)
+
+# 예제 데이터 생성
+data = {
+    'name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+    'math': [88, 92, 85, 95, 90],
+    'science': [80, 85, 88, 92, 85],
+    'english': [90, 87, 85, 88, 92]
+}
+
+# Dataframe 생성
+df = pd.DataFrame(data)
+print(df.head())
+
+# 개인별 과목 점수의 평균값 계산 (axis=1)
+df['average'] = df[['math', 'science', 'english']].mean(axis=1)
+print(df)
+
+# 이름과 평균값만을 포함하는 새로운 데이터 프레임 생성
+average_df = df[['name','average']]
+print(average_df)
+
+# 2.2 넘파이 
+
+                   
