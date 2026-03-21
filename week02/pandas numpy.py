@@ -36,9 +36,9 @@ print(sample_df.loc['a','c'])
 
 # iloc: integer location의 약자
 print(sample_df.iloc[[0,1,2]])
-print(sample_de.iloc[0:2])
-print(sample_de.iloc[0:3])
-print(sample_de.iloc[0:3, 2:4]) #컬럼까지 동시에 인덱싱
+print(sample_df.iloc[0:2])
+print(sample_df.iloc[0:3])
+print(sample_df.iloc[0:3, 2:4]) #컬럼까지 동시에 인덱싱
 
 print(sample_df.drop(['var_1','var_3'],axis =1)) # 컬럼을 제거하려면 axis = 1
 print(sample_df.drop(['var_1','var_2'],axis =1))
@@ -48,20 +48,20 @@ netfilx = pd.read_csv('2.1.1.netfilx.csv')
 print(netfilx.head())
 
 print(netfilx['release_year'])
-print(nexflix['release_year'] > 2015)
+print(netfilx['release_year'] > 2015)
 
-more2015 = netfilx[netfilx['release_year' > 2015]]
+more2015 = netfilx[netfilx['release_year'] > 2015]
 print(more2015.head(10))
 
-print(~(netflix['release_year'] > 2015))
-less2015 = netflix[~(netflix['release_year'] > 2015)]
+print(~(netfilx['release_year'] > 2015))
+less2015 = netfilx[~(netfilx['release_year'] > 2015)]
 print(less2015.head())
 
-print((netflix['release_year'] > 2015) & (netflix['type'] == 'TV Show'))
-more2015_tv = netflix[(netflix['release_year'] > 2015) & (netflix['type'] == 'TV Show')]
+print((netfilx['release_year'] > 2015) & (netfilx['type'] == 'TV Show'))
+more2015_tv = netfilx[(netfilx['release_year'] > 2015) & (netfilx['type'] == 'TV Show')]
 print(more2015_tv.head())
 
-more2015_or_tv = netflix[(netflix['release_year'] > 2015) | (netflix['type'] == 'TV Show')]
+more2015_or_tv = netfilx[(netfilx['release_year'] > 2015) | (netfilx['type'] == 'TV Show')]
 print(more2015_or_tv.head())
 
 data = {
