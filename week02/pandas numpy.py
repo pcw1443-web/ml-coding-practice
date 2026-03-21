@@ -64,4 +64,20 @@ print(more2015_tv.head())
 more2015_or_tv = netflix[(netflix['release_year'] > 2015) | (netflix['type'] == 'TV Show')]
 print(more2015_or_tv.head())
 
+data = {
+     'name': ['Alice', 'Bob', 'Charlie', 'David', 'Eve', 'Frank', 'Grace', 'Hannah'],
+    'comment_length': [150, 200, 50, 300, 120, 180, 75, 160],
+    'likes': [25, 30, 10, 45, 20, 35, 5, 28],
+    'is_spam': [False, False, True, False, False, True, False, False],
+    'has_image': [True, False, True, True, False, False, True, True]
+}
+df = pd.DataFrame(data)
+print(df.head())
 
+# 필터링 조건 설정
+condition = (
+    (df['comment_length'] >= 100 ) &  #댓글 길이 100자 이상
+    (df['likes'] >= 20) &          #좋아요 20개 이상
+    (~df['is_spam'] &               #스팸 댓글이 아니어야 함
+     (df['has_image']))       #이미지가 포함된 댓글이어야 함
+)
