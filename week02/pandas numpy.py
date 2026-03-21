@@ -196,3 +196,33 @@ print(np_a + np_b)
 print(np_a - np_b)
 print(np_a * np_b)
 print(np_a @ np_b)
+
+print(np.random.randint(11))
+print(np.random.randint(50, 71))
+print(np.random.randint(50, 71, 10))
+print(np.random.choice(['red', 'green','white','black','blue'],size=3))
+print(np.random.choice(['red', 'green','white','black','blue'],size=3, replace=False))
+
+print(np.arange(1,11))
+print(np.arange(1,11,2))
+print(np.linspace(1,100,10))       # 1부터 10까지 균등한 간격의 값을 4개 추출
+
+A = np.array([4, 16, 25])
+print(np.sqrt(A))
+
+print(np.arange(8).reshape(2, 4) + 10)
+
+# 0부터 8 미만까지 출력하고 (2, 4) 크기로 재가공 후, 제곱하여 출력
+a = np.arange(8).reshape(2, 4) ** 2
+print(a)
+
+print(a.sum())     # 모든 요소의 합
+print(a.mean())    # 모든 요소의 평균
+print(a.mean(axis = 0))    # 열을 기준으로 연산
+
+print(a.min())    # 모든 요소 중 최솟값
+print(a.max())    # 모든 요소 중 최댓값
+
+print(a.max(axis=1))
+print(a.cumsum())        # 모든 요소의 누적합
+print(a.argmax())        # 모든 요소 중 최댓값의 인덱스
