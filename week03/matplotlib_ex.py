@@ -190,3 +190,57 @@ plt.legend(violin_plot['bodies'], ['1st Class', '2nd Class', '3rd Class'], title
 plt.savefig('Figure10.png')
 plt.close()
 
+"""### **에러 바 : 요금의 평균과 표준편차 표현하기**"""
+
+fare_means = titanic.groupby('Parch')['Fare'].mean()
+fare_std = titanic.groupby('Parch')['Fare'].std().fillna(0) # 혼자 탄 경우 등 NaN 방지
+
+plt.figure(figsize=(10, 6))
+plt.errorbar(fare_means.index, fare_means, yerr=fare_std, fmt='o',
+             capsize=5, capthick=1, label='Fare')
+
+plt.title('Error Bar Plot of Fare by Parch')
+plt.xlabel('Parch')
+plt.ylabel('Fare')
+plt.xticks(fare_means.index)
+plt.legend()
+plt.savefig('Figure11.png')
+plt.close()
+
+"""### **서브플롯 활용 예시**"""
+
+# 1. subplot 하나씩 추가하기 (Figure 13 연계)
+parch_counts = titanic.groupby('Parch')['Survived'].value_counts().unstack().fillna(0)
+x_parch = parch_counts.index.astype(str)
+y_dead = parch_counts[0].values
+y_survived = parch_counts[1].values
+
+plt.figure(figsize=(10, 10))
+plt.subplot(2, 1, 1)
+plt.plot(x_parch, y_dead, '-o', color='indigo', label='Not Survived')
+plt.ylabel('Not Survived Count')
+plt.legend()
+
+plt.subplot(2, 1, 2)
+plt.bar(x_parch, y_survived, color='deeppink', alpha=0.7, label='Survived')
+plt.ylabel('Survived Count')
+plt.legend()
+
+plt.suptitle('Survival Analysis by Parch (Subplot Method 1)')
+plt.tight_layout()
+plt.savefig('Figure13.png')
+plt.close()
+
+# 2. subplots()로 동시에 생성 및 축 공유 (Figure 16 연계)
+fig, ax1 = plt.subplots(figsize=(10, 6))
+ax1.plot(x_parch, y_dead, '-s', color='indigo', linewidth=3, label='Not Survived')
+ax1.set_xlabel('Parch')
+ax1.set_ylabel('Not Survived Count', color='indigo')
+
+ax2 = ax1.twinx() # x축 공유
+ax2.bar(x_parch, y_survived, color='deeppink', alpha=0.3, label='Survived')
+ax2.set_ylabel('Survived Count', color='deeppink')
+
+plt.title('Survival Analysis by Parch (Dual Axis)')
+plt.savefig('Figure16.png')
+plt.close()
