@@ -129,3 +129,33 @@ correlation_matrix = titanic.drop('PassengerId', axis=1).corr(numeric_only=True)
 plt.matshow(correlation_matrix, cmap='PuRd_r')
 plt.colorbar()
 
+# x축과 y축의 눈금 설정
+plt.xticks(range(len(correlation_matrix.columns)), correlation_matrix.columns, rotation=45)
+plt.yticks(range(len(correlation_matrix.columns)), correlation_matrix.columns)
+
+plt.title('Correlation Heatmap of Titanic', pad=20)
+plt.savefig('Figure07.png')
+plt.close()
+
+"""### **영역 채우기 그래프 : 나이대별 생존자와 사망자 수 표현하기**"""
+
+# 나이대별 범주화
+age_groups = pd.cut(titanic_age['Age'], bins=range(0, 81, 5))
+survived_by_age = titanic_age.groupby([age_groups, 'Survived'], observed=False).size().unstack().fillna(0)
+
+# 영역 채우기 그래프 그리기
+plt.figure(figsize=(10, 6))
+plt.fill_between(survived_by_age.index.astype(str), survived_by_age[1],
+                 color='purple', alpha=0.9, label='Survived')
+plt.fill_between(survived_by_age.index.astype(str), survived_by_age[0],
+                 color='hotpink', alpha=0.6, label='Not Survived')
+
+plt.title('Survival by Age Group on Titanic')
+plt.xlabel('Age')
+plt.ylabel('Count')
+plt.xticks(rotation=45)
+plt.legend()
+plt.grid(True)
+plt.savefig('Figure08.png')
+plt.close()
+
