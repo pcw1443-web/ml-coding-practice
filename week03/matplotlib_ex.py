@@ -72,3 +72,34 @@ for i, value in enumerate(survived_counts):
 
 plt.savefig('Figure03.png')
 plt.close()
+
+"""### **산점도 그래프 : 나이와 요금, 생존 여부 확인하기**"""
+
+# 결측치 처리
+titanic_scatter = titanic.dropna(subset=['Age', 'Fare', 'Survived'])
+
+# 산점도 그래프 그리기
+plt.figure(figsize=(12, 8))
+scatter = plt.scatter(x='Age', y='Fare', data=titanic_scatter, c=titanic_scatter['Survived'], cmap='Set2', alpha=0.7)
+
+plt.title('Age and Fare Relationship with Survival on the Titanic')
+plt.xlabel('Age')
+plt.ylabel('Fare')
+plt.legend(handles=scatter.legend_elements()[0], title='Survived',
+           labels=['Not Survived', 'Survived'], loc='upper right')
+plt.savefig('Figure04.png')
+plt.close()
+
+"""### **파이 차트 : 생존자, 사망자 비율 표현하기**"""
+
+# 사망자와 생존자의 수 계산
+survived_total_counts = titanic['Survived'].value_counts()
+
+# 파이 차트 그리기
+plt.figure(figsize=(8, 8))
+plt.pie(survived_total_counts, labels=['Not Survived', 'Survived'], colors=['orange', 'gold'],
+        autopct='%0.1f%%', startangle=90, shadow=True, explode=(0, 0.1))
+
+plt.title('Survival Distribution on the Titanic')
+plt.savefig('Figure05.png')
+plt.close()
