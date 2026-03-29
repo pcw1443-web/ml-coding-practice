@@ -159,3 +159,34 @@ plt.grid(True)
 plt.savefig('Figure08.png')
 plt.close()
 
+"""### **박스 플롯 : 승객 나이의 데이터 분포 살펴보기**"""
+
+# 승객 등급에 따른 나이의 박스 플롯
+plt.figure(figsize=(8, 6))
+plt.boxplot([titanic_age[titanic_age['Pclass'] == 1]['Age'],
+             titanic_age[titanic_age['Pclass'] == 2]['Age'],
+             titanic_age[titanic_age['Pclass'] == 3]['Age']],
+            labels=['1st Class', '2nd Class', '3rd Class'])
+
+plt.title('Box Plot for Age by Pclass')
+plt.xlabel('Pclass')
+plt.ylabel('Age')
+plt.savefig('Figure09.png')
+plt.close()
+
+"""### **바이올린 플롯 : 승객 등급에 따른 나이 분포 표시하기**"""
+
+plt.figure(figsize=(10, 6))
+violin_plot = plt.violinplot([titanic_age[titanic_age['Pclass'] == 1]['Age'],
+                              titanic_age[titanic_age['Pclass'] == 2]['Age'],
+                              titanic_age[titanic_age['Pclass'] == 3]['Age']],
+                             showmeans=False, showmedians=True)
+
+plt.title('Violin Plot of Age by Pclass')
+plt.xlabel('Pclass')
+plt.ylabel('Age')
+plt.xticks([1, 2, 3], ['1st Class', '2nd Class', '3rd Class'])
+plt.legend(violin_plot['bodies'], ['1st Class', '2nd Class', '3rd Class'], title='Pclass')
+plt.savefig('Figure10.png')
+plt.close()
+
