@@ -18,3 +18,15 @@ print(titanic.info())
 # 객실 등급에 따른 생존자와 사망자의 평균 계산 
 pclass_survived_mean = titanic.groupby('Pclass')['Survived'].mean().reset_index()
 
+# 선 그래프 그리기 
+plt.plot(pclass_survived_mean['Pclass'], pclass_survived_mean['Survived'],
+         marker='o', linestyle='-', color='violet')
+plt.title('Survival Rate Variation Across Passenger Classes')
+plt.xlabel('Pclass')
+plt.ylabel('Survival Rate')
+plt.xticks([1, 2, 3])
+plt.grid(True)
+plt.savefig('Figure01.png')         # 결과를 그림파일로 저장
+plt.close()                         # 다음 Plot을 새로 그리기 위해 plt 닫기
+
+
