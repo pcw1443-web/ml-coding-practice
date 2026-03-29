@@ -103,3 +103,29 @@ plt.pie(survived_total_counts, labels=['Not Survived', 'Survived'], colors=['ora
 plt.title('Survival Distribution on the Titanic')
 plt.savefig('Figure05.png')
 plt.close()
+
+"""### **히스토그램 : 승객의 나이 분포 표시하기**"""
+
+# 나이 결측치 제거
+titanic_age = titanic.dropna(subset=['Age'])
+
+# 히스토그램 그리기
+plt.figure(figsize=(10, 6))
+plt.hist(titanic_age['Age'], bins=20, color='seagreen', edgecolor='black')
+
+plt.xlabel('Age')
+plt.ylabel('Count')
+plt.title('Distribution of Ages on the Titanic')
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.savefig('Figure06.png')
+plt.close()
+
+"""### **히트맵 : 두 변수의 상관 관계를 표시하기**"""
+
+# 상관 행렬 계산 (수치형 데이터만)
+correlation_matrix = titanic.drop('PassengerId', axis=1).corr(numeric_only=True)
+
+# 히트맵 그리기
+plt.matshow(correlation_matrix, cmap='PuRd_r')
+plt.colorbar()
+
