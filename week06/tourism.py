@@ -5,7 +5,7 @@ import json
 import pandas as pd
 
 # [중요] 여기에 공공데이터포털에서 발급받은 서비스키를 넣어야 합니다.
-ServiceKey = "자신의 Service Key"
+ServiceKey = "eb08b83539590a3dabb3cd6525c7c26ed7126467625037a137bfddcaf54e61d5"
 
 def main():
     jsonResult = []

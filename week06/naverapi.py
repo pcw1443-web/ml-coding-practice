@@ -4,8 +4,8 @@ import datetime
 import json
 
 # [중요] 네이버 개발자 센터에서 발급받은 ID와 Secret을 입력해야 합니다.
-client_id = 'Client ID'
-client_secret = 'Client Secret'
+client_id = 'OLk2QOWxH3MVgNWz7w00'
+client_secret = 'oq_bPbE_Ah'
 
 def main():
     node = 'news'  # 크롤링할 대상 (news, blog, shop 등)
@@ -63,3 +63,28 @@ def getRequestUrl(url):
         print(e)
         print("[%s] Error for URL : %s" % (datetime.datetime.now(), url))
         return None
+
+def getPostData(post, jsonResult, cnt):
+    title = post['title']
+    description = post['description']
+    org_link = post['originallink']
+    link = post['link']
+
+    # 네이버 API 날짜 포맷을 읽기 편한 형태로 변환
+    try:
+        pDate = datetime.datetime.strptime(post['pubDate'], '%a, %d %b %Y %H:%M:%S +0900')
+        pDate = pDate.strftime('%Y-%m-%d %H:%M:%S')
+    except:
+        pDate = post['pubDate']
+
+    jsonResult.append({
+        'cnt': cnt,
+        'title': title,
+        'description': description,
+        'org_link': org_link,
+        'link': link,
+        'pDate': pDate
+    })
+
+if __name__ == '__main__':
+    main()
