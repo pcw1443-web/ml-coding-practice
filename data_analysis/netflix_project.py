@@ -142,3 +142,27 @@ plt.show()
 
 netflix[netflix['title'].str.contains('Sankofa', na=False, case=False)]
 
+# 출력할 최대 행 수를 None으로 설정해서 모두 출력
+pd.set_option('display.max_rows', None)
+
+# 쉼표로 country 열의 값을 파이썬 리스트로 만들기
+netflix['country'] = netflix['country'].str.split(', ')
+netflix['country']
+
+# 파이썬 리스트로 바꾼 country 열의 값에 explode( ) 함수를 적용하여 개별 행으로 분리
+netflix_age_country = netflix.explode('country')
+netflix_age_country
+
+# title열의 값이 ‘Sankofa’인 행 전체를 확인하여 country 열과 age_group 열의 값이 어떻게 이루어져 있는지 확인
+netflix_age_country[netflix_age_country['title'].str.contains('Sankofa', na=False, case=False)]
+
+# 각 나이 그룹에 따른 국가별 넷플릭스 콘텐츠 수 구하기
+netflix_age_country_unstack = netflix_age_country.groupby('age_group')['country'].value_counts().unstack()
+netflix_age_country_unstack
+
+# 특정 나이 그룹에 따른 특정 나라별 콘텐츠로 필터링
+# 연령, 국가 리스트
+age_order = ['All', 'Older Kids', 'Teens', 'Adults']
+country_order = ['United States', 'India', 'United Kingdom', 'Canada', 'Japan',
+                 'France', 'South Korea', 'Spain', 'Mexico', 'Turkey']
+
