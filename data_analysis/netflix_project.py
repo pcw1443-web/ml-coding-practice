@@ -46,3 +46,25 @@ netflix.info()
 # 데이터프레임의 각 컬럼별 결측치 개수 반환
 # isna() == isnull() : 결측 값은 True 반환하고, 그 외에는 False 반환
 netflix.isna().sum()
+
+# 시청 등급 기준표를 참고하여 Netflix의 rating 변수를 이용한 age_group_dic 변수 생성
+# rating 컬럼의 값을 age_group이라는 새로운 컬럼으로 복사
+netflix['age_group'] = netflix['rating']
+
+# 시청 등급 코드를 더 이해하기 쉬운 표현으로 매핑할 딕셔너리 정의(key, value 선언)
+age_group_dic = {
+    'G': 'All',
+    'TV-G': 'All',
+    'TV-Y': 'All',
+    'PG': 'Older Kids',
+    'TV-Y7': 'Older Kids',
+    'TV-Y7-FV': 'Older Kids',
+    'TV-PG': 'Older Kids',
+    'PG-13': 'Teens',
+    'TV-14': 'Young Adults',
+    'NC-17': 'Adults',
+    'NR': 'Adults',
+    'UR': 'Adults',
+    'R': 'Adults',
+    'TV-MA': 'Adults'
+    }
