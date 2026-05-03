@@ -71,3 +71,21 @@ print(cm)
 
 y_train_perfect_predictions = y_train_5  # 완벽한 분류기일 경우
 print(confusion_matrix(y_train_5, y_train_perfect_predictions))
+
+# 정밀도와 재현율
+from sklearn.metrics import precision_score, recall_score
+
+print(precision_score(y_train_5, y_train_pred))  # == 3530 / (687 + 3530)
+
+print(recall_score(y_train_5, y_train_pred))  # == 3530 / (1891 + 3530)
+
+from sklearn.metrics import f1_score
+
+print(f1_score(y_train_5, y_train_pred))
+
+# ROC 곡선
+from sklearn.metrics import roc_auc_score
+
+y_scores = cross_val_predict(sgd_clf, X_train, y_train_5, cv=3,
+                             method="decision_function")
+roc_auc_score(y_train_5, y_scores)
