@@ -190,3 +190,38 @@ plt.suptitle('Target ages proportion of total content by country',
 plt.title('Here we see interesting differences between countries. Most shows in South Korea are targeted to adults, for instance.',
           fontsize=12, fontfamily='serif')
 plt.show()
+
+# 넷플릭스 데이터의 description 열 이용한 워드 클라우드 생성
+
+# WordCloud : 워드 클라우드 생성에 필요한 모듈
+# Image : 워드 클라우드를 원하는 형태로 그리기 위해 그림을 불러오는 패키지
+from wordcloud import WordCloud
+from PIL import Image
+
+plt.figure(figsize=(15, 5))
+
+# wordcolud에서 작동할 수 있도록 데이터프레임을 list로 1차 변환시키고 str(문자열)로 2차 변환
+text = str(list(netflix['description']))
+
+# mask : 단어를 그릴 위치 설정, 흰색(#FFFFFF) 항목은 마스킹된 것으로 간주
+# 로고 이미지 열고 넘파이 배열로 변환
+mask = np.array(Image.open('netflix_logo.jpg'))
+
+# 워드 클라우드 색상맵 만들기
+cmap = plt.matplotlib.colors.LinearSegmentedColormap.from_list('', ['#221f1f','#b20710'])
+
+# 워드 클라우드 생성
+# WordCloud( ).generate(text) : 선언해준 text에서 wordcloud를 생성
+wordcloud = WordCloud(background_color = 'white', width = 1400, height = 1400,
+                      max_words = 170, mask = mask, colormap=cmap).generate(text)
+
+plt.suptitle('Keywords in the description of Movies and TV shows',
+             fontweight='bold', fontfamily='serif', fontsize=15)
+
+# 워드 클라우드 표시
+# plt.imshow( ) : array에 색을 채워서 이미지로 표시
+plt.imshow(wordcloud)
+
+# 축 감추기
+plt.axis('off')
+plt.show()
