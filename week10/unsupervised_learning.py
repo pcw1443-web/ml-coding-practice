@@ -9,3 +9,10 @@ plt.rc('axes', labelsize=14, titlesize=14)
 plt.rc('legend', fontsize=14)
 plt.rc('xtick', labelsize=10)
 plt.rc('ytick', labelsize=10)
+
+blob_centers = np.array([[ 0.2,  2.3], [-1.5 ,  2.3], [-2.8,  2.8],
+                         [-2.8,  4.2], [-2.8,  1.0]])
+blob_std = np.array([0.4, 0.3, 0.1, 0.1, 0.1])
+X, y = make_blobs(n_samples=2000, centers=blob_centers, cluster_std=blob_std,
+                  random_state=7)
+
