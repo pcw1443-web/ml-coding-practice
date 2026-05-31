@@ -139,4 +139,15 @@ def plot_dbscan(dbscan, X, size, show_xlabels=True, show_ylabels=True):
     plt.grid()
     plt.gca().set_axisbelow(True)
 
+c
 
+X, y = make_moons(n_samples=1000, noise=0.05, random_state=42)
+dbscan = DBSCAN(eps=0.2, min_samples=5)
+dbscan.fit(X)
+
+knn = KNeighborsClassifier(n_neighbors=50)
+knn.fit(dbscan.components_, dbscan.labels_[dbscan.core_sample_indices_])
+
+X_new = np.array([[-0.5, 0], [0, 0.5], [1, -0.1], [2, 1]])
+print(knn.predict(X_new))
+print(knn.predict_proba(X_new))
