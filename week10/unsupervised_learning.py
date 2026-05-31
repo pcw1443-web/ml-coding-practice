@@ -16,3 +16,17 @@ blob_std = np.array([0.4, 0.3, 0.1, 0.1, 0.1])
 X, y = make_blobs(n_samples=2000, centers=blob_centers, cluster_std=blob_std,
                   random_state=7)
 
+k = 5
+kmeans = KMeans(n_clusters=k, n_init=10, random_state=42)
+y_pred = kmeans.fit_predict(X)
+
+def plot_clusters(X, y=None):
+    plt.scatter(X[:, 0], X[:, 1], c=y, s=1)
+    plt.xlabel("$x_1$")
+    plt.ylabel("$x_2$", rotation=0)
+
+plt.figure(figsize=(8, 4))
+plot_clusters(X)
+plt.gca().set_axisbelow(True)
+plt.grid()
+plt.show()
